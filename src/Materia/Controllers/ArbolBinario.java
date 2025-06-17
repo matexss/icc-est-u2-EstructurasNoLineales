@@ -1,4 +1,5 @@
 package Materia.Controllers;
+
 import Materia.Models.Node;
 
 public class ArbolBinario {
@@ -11,50 +12,53 @@ public class ArbolBinario {
     public void insert(int value) {
         root = insertRec(root, value);
     }
+
     private Node insertRec(Node padre, int value) {
         if (padre == null) {
-           return new Node(value);
+            return new Node(value);
         }
         if (value < padre.getValue()) {
-            //me voy a la izquierda
             padre.setLeft(insertRec(padre.getLeft(), value));
         } else if (value > padre.getValue()) {
-            //me voy a la derecha
             padre.setRight(insertRec(padre.getRight(), value));
         }
         return padre;
     }
 
-/* ORDEN IN ORDER
-ublic void imprimir(Node node) {
-        if (node != null) {  
-            imprimir(node.getLeft());       
-            System.out.print(node.getValue() + " ");
-            imprimir(node.getRight());
-        }
+    public void imprimir() {
+        imprimir(root);
     }
-*/
 
-//ORDEN PRE ORDER
-public void imprimir(Node node) {
-        if (node != null) {  
+    public void imprimir(Node node) {
+        if (node != null) {
             System.out.print(node.getValue() + " ");
             imprimir(node.getLeft());
             imprimir(node.getRight());
         }
     }
 
-public boolean buscar(int value) {
-    
-
-    return buscarRec(root, value);
+    public boolean buscar(int value) {
+    boolean encontrado = buscarRec(root, value);
+    if (encontrado) {
+        System.out.println("Valor " + value + " encontrado en el árbol.");
+    } else {
+        System.out.println("Valor " + value + " no encontrado en el árbol.");
+    }
+    return encontrado;
 }
 
 
-
-public void imprimir() {
-    imprimir(root);
-}
-
-
+    private boolean buscarRec(Node node, int value) {
+        if (node == null) {
+            return false;
+        }
+        if (node.getValue() == value) {
+            return true;
+        }
+        if (value < node.getValue()) {
+            return buscarRec(node.getLeft(), value);
+        } else {
+            return buscarRec(node.getRight(), value);
+        }
+    }
 }
