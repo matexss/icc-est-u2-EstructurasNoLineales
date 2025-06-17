@@ -24,5 +24,37 @@ public class ArbolBinario {
         }
         return padre;
     }
+
+/* ORDEN IN ORDER
+ublic void imprimir(Node node) {
+        if (node != null) {  
+            imprimir(node.getLeft());       
+            System.out.print(node.getValue() + " ");
+            imprimir(node.getRight());
+        }
+    }
+*/
+
+//ORDEN PRE ORDER
+public void imprimir(Node node) {
+        if (node != null) {  
+            System.out.print(node.getValue() + " ");
+            imprimir(node.getLeft());
+            imprimir(node.getRight());
+        }
+    }
+
+public boolean buscar(int value) {
     
+
+    return buscarRec(root, value);
+}
+
+
+
+public void imprimir() {
+    imprimir(root);
+}
+
+
 }
